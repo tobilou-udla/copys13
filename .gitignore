@@ -1,0 +1,22 @@
+# Executables
+main
+sigrh
+
+# Data files
+*.dat
+
+# Object files
+*.o
+
+# Temporary files
+*~
+*.tmp
+
+# IDE files
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

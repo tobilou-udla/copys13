@@ -11,231 +11,269 @@ void leerCadena(char *cadena, int num){
 
 int menu(){
     int opc;
-    printf("\nMenu de Opciones:\n");
-    printf("=====================================\n");
-    printf("1. Crear Jugadores\n");
-    printf("2. Crear Equipos\n");
-    printf("3. Listar Jugadores\n");
-    printf("4. Listar Equipos\n");
-    printf("5. Crear Partidos\n");
-    printf("6. Listar Partidos\n");
-    printf("7. Salir\n");
+    printf("\n==== SISTEMA INTEGRADO DE GESTIÓN DE RECURSOS HUMANOS ====\n");
+    printf("==========================================================\n");
+    printf("1. Crear Empleados\n");
+    printf("2. Crear Departamentos\n");
+    printf("3. Listar Empleados\n");
+    printf("4. Listar Departamentos\n");
+    printf("5. Registrar Asistencia\n");
+    printf("6. Listar Asistencias\n");
+    printf("7. Consultar Vacaciones\n");
+    printf("8. Procesar Nómina\n");
+    printf("9. Salir\n");
+    printf("==========================================================\n");
     printf("Seleccione una opcion: ");
     scanf("%d", &opc);
     fflush(stdin); // Limpiar el buffer de entrada
     return opc;
 }
 
-void crearJugadores(){
-    struct Jugador jugadores[] = {{1,"Juan P","Delantero",0},
-                                {2,"Luis A","Defensa",0},
-                                {3,"Pedro R","Portero",0},
-                                {4,"Cris R","Centrocampista",0},
-                                {5,"Leo M","Delantero",0},
-                                {6,"Alex A","Defensa",0},
-                                {7,"Javi M","Portero",0},
-                                {8,"Sergi B","Centrocampista",0},
-                                {9,"Andres I","Delantero",0},
-                                {10,"David S","Defensa",0},
-                                {11,"Carlos G","Portero",0},
-                                {12,"Raul C","Centrocampista",0},
-                                {13,"Miguel A","Delantero",0},
-                                {14,"Jose L","Defensa",0},
-                                {15,"Fernando P","Portero",0},
-                                {16,"Victor H","Centrocampista",0},
-                                {17,"Alvaro T","Delantero",0},
-                                {18,"Pablo M","Defensa",0},
-                                {19,"Sergio R","Portero",0},
-                                {20,"Manuel J","Centrocampista",0},
-                                {21,"Jorge D","Delantero",0},
-                                {22,"Antonio F","Defensa",0},
-                                {23,"Eduardo V","Portero",0},
-                                {24,"Hector G","Centrocampista",0},
-                                {25,"Raul M","Delantero",0},
-                                {26,"Carlos A","Defensa",0},
-                                {27,"Luis C","Portero",0},
-                                {28,"Sergio T","Centrocampista",0},
-                                {29,"David P","Delantero",0},
-                                {30,"Juan D","Defensa",0}};
-    guardarJugadores(jugadores, 30);
-    printf("Jugadores creados y guardados correctamente.\n");
+void crearEmpleados(){
+    struct Empleado empleados[] = {
+        {1, "Juan Pérez", "Gerente General", 8500.00, 1, "2020-01-15", 15, 0},
+        {2, "María García", "Contador", 4500.00, 2, "2021-03-10", 12, 5},
+        {3, "Carlos López", "Desarrollador", 5200.00, 3, "2021-06-20", 10, 8},
+        {4, "Ana Rodríguez", "Analista RRHH", 4800.00, 4, "2020-11-05", 18, 2},
+        {5, "Luis Martínez", "Vendedor", 3800.00, 5, "2022-01-12", 8, 12},
+        {6, "Carmen Sánchez", "Diseñadora", 4200.00, 3, "2021-09-18", 14, 6},
+        {7, "Roberto Torres", "Supervisor", 5500.00, 1, "2019-07-30", 20, 4},
+        {8, "Elena Morales", "Asistente", 3200.00, 4, "2022-05-25", 5, 1},
+        {9, "Miguel Herrera", "Técnico", 4000.00, 3, "2021-12-08", 9, 15},
+        {10, "Patricia Ruiz", "Coordinadora", 4700.00, 2, "2020-08-14", 16, 3},
+        {11, "Jorge Castillo", "Analista", 4300.00, 2, "2021-11-22", 11, 7},
+        {12, "Sandra Vega", "Recepcionista", 3000.00, 4, "2022-02-18", 6, 0},
+        {13, "Daniel Flores", "Programador", 5000.00, 3, "2020-12-03", 13, 9},
+        {14, "Isabel Ramos", "Contadora Jr", 3900.00, 2, "2022-04-07", 7, 2},
+        {15, "Andrés Jiménez", "Vendedor Sr", 4500.00, 5, "2019-10-15", 22, 18}
+    };
+    guardarEmpleados(empleados, 15);
+    printf("Empleados creados y guardados correctamente.\n");
 }
 
-void imprimirJugadores(struct Jugador jugadores[], int numJugadores){
-    printf("\nLista de Jugadores:\n");
+void imprimirEmpleados(struct Empleado empleados[], int numEmpleados){
+    printf("\n==== LISTA DE EMPLEADOS ====\n");
     printf("=====================================\n");
-    for (int i = 0; i < numJugadores; i++) {
-        printf("ID: %d, Nombre: %s, Posicion: %s\n", 
-               jugadores[i].id, jugadores[i].nombre, 
-               jugadores[i].posicion);
-    }
-}
-
-void guardarJugadores(struct Jugador jugadores[], int numJugadores){
-    FILE *archivo = fopen("jugadores.dat", "wb");
-    if (archivo == NULL) {
-        printf("Error al abrir el archivo para guardar los jugadores.\n");
-        return;
-    }
-    fwrite(jugadores, sizeof(struct Jugador), numJugadores, archivo);
-    fclose(archivo);
-}
-
-int cargarJugadores(struct Jugador jugadores[], int *numJugadores){
-    FILE *archivo = fopen("jugadores.dat", "rb");
-    if (archivo == NULL) {
-        printf("Error al abrir el archivo para cargar los jugadores.\n");
-        return 0;
-    }
-    *numJugadores = fread(jugadores, sizeof(struct Jugador), 30, archivo);
-    fclose(archivo);
-    return 1;
-}
-
-void crearEquipos(){
-    struct Jugador jugadores[30];
-    struct Equipo equipos[8];
-    int numJugadores = 0;
-    cargarJugadores(jugadores, &numJugadores);
-
-    if (numJugadores < 6) {
-        printf("No hay suficientes jugadores para crear equipos.\n");
-        return;
-    }
-
-    for (int i = 0; i < 8; i++) {
-        equipos[i].id = i + 1;
-        printf("Ingrese el nombre del equipo %d: ", i + 1);
-        leerCadena(equipos[i].nombre, sizeof(equipos[i].nombre));
-        printf("Selecciones los jugadores para el equipo %d:\n", i + 1);
-        for (int j = 0; j < 6; j++) {
-            int jugadorId;
-            printf("Jugador %d (ID): ", j + 1);
-            scanf("%d", &jugadorId);
-            fflush(stdin); // Limpiar el buffer de entrada
-            
-            // Validar que el ID del jugador sea válido
-            if (jugadorId < 1 || jugadorId > numJugadores) {
-                printf("ID de jugador invalido. Debe estar entre 1 y %d.\n", numJugadores);
-                j--; // Repetir la iteración para este jugador
-                continue;
-            }
-            
-            equipos[i].jugadores[j] = jugadores[jugadorId - 1]; // Asignar el jugador al equipo
-        }
-        printf("Equipo %d creado con exito.\n", i + 1);
-    }
-    guardarEquipos(equipos, 8);
-    printf("Equipos guardados correctamente.\n");
-
-}
-
-void imprimirEquipos(struct Equipo equipos[], int numEquipos){
-    printf("\nLista de Equipos:\n");
-    printf("=====================================\n");
-    for (int i = 0; i < numEquipos; i++) {
-        printf("ID: %d, Nombre: %s\n", equipos[i].id, equipos[i].nombre);
-        printf("Jugadores:\n");
-        for (int j = 0; j < 6; j++) {
-            printf("  ID: %d, Nombre: %s, Posicion: %s\n", 
-                   equipos[i].jugadores[j].id, 
-                   equipos[i].jugadores[j].nombre, 
-                   equipos[i].jugadores[j].posicion);
-        }
+    for (int i = 0; i < numEmpleados; i++) {
+        printf("ID: %d\n", empleados[i].id);
+        printf("Nombre: %s\n", empleados[i].nombre);
+        printf("Puesto: %s\n", empleados[i].puesto);
+        printf("Salario: $%.2f\n", empleados[i].salario);
+        printf("Departamento ID: %d\n", empleados[i].departamentoId);
+        printf("Fecha Ingreso: %s\n", empleados[i].fechaIngreso);
+        printf("Días Vacaciones: %d\n", empleados[i].diasVacaciones);
+        printf("Horas Extras: %d\n", empleados[i].horasExtras);
         printf("-------------------------------------\n");
     }
-    if (numEquipos == 0) {
-        printf("No hay equipos registrados.\n");
+    if (numEmpleados == 0) {
+        printf("No hay empleados registrados.\n");
     }
 }
 
-void guardarEquipos(struct Equipo equipos[], int numEquipos){
-    FILE *archivo = fopen("equipos.dat", "wb");
+void guardarEmpleados(struct Empleado empleados[], int numEmpleados){
+    FILE *archivo = fopen("empleados.dat", "wb");
     if (archivo == NULL) {
-        printf("Error al abrir el archivo para guardar los equipos.\n");
+        printf("Error al abrir el archivo para guardar los empleados.\n");
         return;
     }
-    fwrite(equipos, sizeof(struct Equipo), numEquipos, archivo);
+    fwrite(empleados, sizeof(struct Empleado), numEmpleados, archivo);
     fclose(archivo);
 }
 
-int leerEquipos(struct Equipo equipos[], int *numEquipos){
-    FILE *archivo = fopen("equipos.dat", "rb");
+int cargarEmpleados(struct Empleado empleados[], int *numEmpleados){
+    FILE *archivo = fopen("empleados.dat", "rb");
     if (archivo == NULL) {
-        printf("Error al abrir el archivo para cargar los equipos.\n");
+        printf("Error al abrir el archivo para cargar los empleados.\n");
         return 0;
     }
-    *numEquipos = fread(equipos, sizeof(struct Equipo), 8, archivo);
+    *numEmpleados = fread(empleados, sizeof(struct Empleado), 50, archivo);
     fclose(archivo);
     return 1;
 }
 
-void crearPartidos(){
-    int numEquipos = 0;
-    struct Equipo equipos[8];
-    struct Partido partidos[4];
-    leerEquipos(equipos, &numEquipos);
-    int indexEquipo1, indexEquipo2;
+void crearDepartamentos(){
+    struct Departamento departamentos[] = {
+        {1, "Gerencia General", 0, {}},
+        {2, "Contabilidad", 0, {}},
+        {3, "Tecnología", 0, {}},
+        {4, "Recursos Humanos", 0, {}},
+        {5, "Ventas", 0, {}}
+    };
     
-    if (numEquipos < 2) {
-        printf("No hay suficientes equipos para crear partidos.\n");
-        return;
+    // Asignar empleados a departamentos basándose en los empleados creados
+    struct Empleado empleados[50];
+    int numEmpleados = 0;
+    
+    if (cargarEmpleados(empleados, &numEmpleados)) {
+        for (int i = 0; i < numEmpleados; i++) {
+            int deptId = empleados[i].departamentoId;
+            if (deptId >= 1 && deptId <= 5) {
+                int deptIndex = deptId - 1;
+                if (departamentos[deptIndex].numEmpleados < 20) {
+                    departamentos[deptIndex].empleados[departamentos[deptIndex].numEmpleados] = empleados[i];
+                    departamentos[deptIndex].numEmpleados++;
+                }
+            }
+        }
     }
-
-    for (int i = 0; i < 4; i++) {
-        partidos[i].id = i + 1;
-        printf("Partido %d:\n", i + 1);
-        imprimirEquipos(equipos, numEquipos);
-        printf("Seleccione el equipo 1 (ID): ");
-        scanf("%d", &indexEquipo1);
-        partidos[i].equipo1 = equipos[indexEquipo1 - 1]; // Asignar el equipo 1
-        printf("Ingrese los goles del equipo 1: ");
-        scanf("%d", &partidos[i].golesEquipo1);
-        fflush(stdin); // Limpiar el buffer de entrada
-        printf("Seleccione el equipo 2 (ID): ");
-        scanf("%d", &indexEquipo2);
-        partidos[i].equipo2 = equipos[indexEquipo2 - 1]; // Asignar el equipo 2
-        printf("Ingrese los goles del equipo 2: ");
-        scanf("%d", &partidos[i].golesEquipo2);
-        fflush(stdin); // Limpiar el buffer de entrada
-
-    }
-    guardarPartidos(partidos, 4);
-    printf("Partidos creados y guardados correctamente.\n");
-     
+    
+    guardarDepartamentos(departamentos, 5);
+    printf("Departamentos creados y guardados correctamente.\n");
 }
 
-void imprimirPartidos(struct Partido partidos[], int numPartidos){
-    printf("\nLista de Partidos:\n");
+void imprimirDepartamentos(struct Departamento departamentos[], int numDepartamentos){
+    printf("\n==== LISTA DE DEPARTAMENTOS ====\n");
     printf("=====================================\n");
-    for (int i = 0; i < numPartidos; i++) {
-        printf("ID: %d\n", partidos[i].id);
-        printf("Equipo 1: %s (Goles: %d)\n", partidos[i].equipo1.nombre, partidos[i].golesEquipo1);
-        printf("Equipo 2: %s (Goles: %d)\n", partidos[i].equipo2.nombre, partidos[i].golesEquipo2);
+    for (int i = 0; i < numDepartamentos; i++) {
+        printf("ID: %d, Nombre: %s\n", departamentos[i].id, departamentos[i].nombre);
+        printf("Número de empleados: %d\n", departamentos[i].numEmpleados);
+        printf("Empleados:\n");
+        for (int j = 0; j < departamentos[i].numEmpleados; j++) {
+            printf("  ID: %d, Nombre: %s, Puesto: %s\n", 
+                   departamentos[i].empleados[j].id, 
+                   departamentos[i].empleados[j].nombre, 
+                   departamentos[i].empleados[j].puesto);
+        }
         printf("-------------------------------------\n");
     }
-    if (numPartidos == 0) {
-        printf("No hay partidos registrados.\n");
+    if (numDepartamentos == 0) {
+        printf("No hay departamentos registrados.\n");
     }
 }
 
-void guardarPartidos(struct Partido partidos[], int numPartidos){
-    FILE *archivo = fopen("partidos.dat", "wb");
+void guardarDepartamentos(struct Departamento departamentos[], int numDepartamentos){
+    FILE *archivo = fopen("departamentos.dat", "wb");
     if (archivo == NULL) {
-        printf("Error al abrir el archivo para guardar los partidos.\n");
+        printf("Error al abrir el archivo para guardar los departamentos.\n");
         return;
     }
-    fwrite(partidos, sizeof(struct Partido), numPartidos, archivo);
+    fwrite(departamentos, sizeof(struct Departamento), numDepartamentos, archivo);
     fclose(archivo);
 }
 
-int leerPartidos(struct Partido partidos[], int *numPartidos){
-    FILE *archivo = fopen("partidos.dat", "rb");
+int leerDepartamentos(struct Departamento departamentos[], int *numDepartamentos){
+    FILE *archivo = fopen("departamentos.dat", "rb");
     if (archivo == NULL) {
-        printf("Error al abrir el archivo para cargar los partidos.\n");
+        printf("Error al abrir el archivo para cargar los departamentos.\n");
         return 0;
     }
-    *numPartidos = fread(partidos, sizeof(struct Partido), 4, archivo);
+    *numDepartamentos = fread(departamentos, sizeof(struct Departamento), 10, archivo);
     fclose(archivo);
     return 1;
+}
+
+void registrarAsistencia(){
+    struct Asistencia asistencias[] = {
+        {1, 1, "2024-01-15", "08:00", "17:00", 0},
+        {2, 2, "2024-01-15", "08:15", "17:15", 15},
+        {3, 3, "2024-01-15", "08:30", "17:30", 30},
+        {4, 4, "2024-01-15", "08:00", "17:00", 0},
+        {5, 5, "2024-01-15", "08:45", "17:45", 45},
+        {6, 6, "2024-01-15", "08:00", "17:00", 0},
+        {7, 7, "2024-01-15", "08:10", "17:10", 10},
+        {8, 8, "2024-01-15", "08:00", "17:00", 0},
+        {9, 9, "2024-01-15", "08:20", "17:20", 20},
+        {10, 10, "2024-01-15", "08:00", "17:00", 0}
+    };
+    guardarAsistencias(asistencias, 10);
+    printf("Asistencias registradas y guardadas correctamente.\n");
+}
+
+void imprimirAsistencias(struct Asistencia asistencias[], int numAsistencias){
+    printf("\n==== REGISTRO DE ASISTENCIAS ====\n");
+    printf("=====================================\n");
+    for (int i = 0; i < numAsistencias; i++) {
+        printf("ID: %d\n", asistencias[i].id);
+        printf("Empleado ID: %d\n", asistencias[i].empleadoId);
+        printf("Fecha: %s\n", asistencias[i].fecha);
+        printf("Hora Entrada: %s\n", asistencias[i].horaEntrada);
+        printf("Hora Salida: %s\n", asistencias[i].horaSalida);
+        printf("Minutos Atraso: %d\n", asistencias[i].minutosAtraso);
+        if (asistencias[i].minutosAtraso > 0) {
+            printf("*** EMPLEADO CON ATRASO ***\n");
+        }
+        printf("-------------------------------------\n");
+    }
+    if (numAsistencias == 0) {
+        printf("No hay asistencias registradas.\n");
+    }
+}
+
+void guardarAsistencias(struct Asistencia asistencias[], int numAsistencias){
+    FILE *archivo = fopen("asistencias.dat", "wb");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo para guardar las asistencias.\n");
+        return;
+    }
+    fwrite(asistencias, sizeof(struct Asistencia), numAsistencias, archivo);
+    fclose(archivo);
+}
+
+int leerAsistencias(struct Asistencia asistencias[], int *numAsistencias){
+    FILE *archivo = fopen("asistencias.dat", "rb");
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo para cargar las asistencias.\n");
+        return 0;
+    }
+    *numAsistencias = fread(asistencias, sizeof(struct Asistencia), 200, archivo);
+    fclose(archivo);
+    return 1;
+}
+
+void consultarVacaciones(){
+    struct Empleado empleados[50];
+    int numEmpleados = 0;
+    
+    if (!cargarEmpleados(empleados, &numEmpleados)) {
+        printf("No se pudieron cargar los empleados.\n");
+        return;
+    }
+    
+    printf("\n==== CONSULTA DE VACACIONES ====\n");
+    printf("=====================================\n");
+    
+    for (int i = 0; i < numEmpleados; i++) {
+        printf("Empleado: %s (ID: %d)\n", empleados[i].nombre, empleados[i].id);
+        printf("Días de vacaciones disponibles: %d\n", empleados[i].diasVacaciones);
+        printf("Fecha de ingreso: %s\n", empleados[i].fechaIngreso);
+        
+        if (empleados[i].diasVacaciones > 15) {
+            printf("*** EMPLEADO CON MUCHAS VACACIONES PENDIENTES ***\n");
+        } else if (empleados[i].diasVacaciones < 5) {
+            printf("*** EMPLEADO CON POCAS VACACIONES DISPONIBLES ***\n");
+        }
+        printf("-------------------------------------\n");
+    }
+}
+
+void procesarNomina(){
+    struct Empleado empleados[50];
+    int numEmpleados = 0;
+    
+    if (!cargarEmpleados(empleados, &numEmpleados)) {
+        printf("No se pudieron cargar los empleados.\n");
+        return;
+    }
+    
+    printf("\n==== PROCESAMIENTO DE NÓMINA ====\n");
+    printf("=====================================\n");
+    
+    float totalNomina = 0;
+    
+    for (int i = 0; i < numEmpleados; i++) {
+        float salarioBase = empleados[i].salario;
+        float pagoHorasExtras = empleados[i].horasExtras * 25.0; // $25 por hora extra
+        float salarioTotal = salarioBase + pagoHorasExtras;
+        
+        printf("Empleado: %s (ID: %d)\n", empleados[i].nombre, empleados[i].id);
+        printf("Salario Base: $%.2f\n", salarioBase);
+        printf("Horas Extras: %d (Pago: $%.2f)\n", empleados[i].horasExtras, pagoHorasExtras);
+        printf("Salario Total: $%.2f\n", salarioTotal);
+        
+        totalNomina += salarioTotal;
+        printf("-------------------------------------\n");
+    }
+    
+    printf("TOTAL NÓMINA DEL MES: $%.2f\n", totalNomina);
+    printf("=====================================\n");
 }
