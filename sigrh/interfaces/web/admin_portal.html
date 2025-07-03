@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIGRH - Portal Administrativo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .card h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        .nav {
+            background-color: #34495e;
+            padding: 1rem;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 2rem;
+        }
+        .nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Sistema Integrado de Gestión de Recursos Humanos (SIGRH)</h1>
+        <p>Portal Administrativo</p>
+    </div>
+    
+    <div class="nav">
+        <a href="#employees">Empleados</a>
+        <a href="#schedules">Horarios</a>
+        <a href="#vacations">Vacaciones</a>
+        <a href="#payroll">Nómina</a>
+        <a href="#attendance">Asistencia</a>
+        <a href="#reports">Reportes</a>
+    </div>
+    
+    <div class="container">
+        <div class="dashboard">
+            <div class="card">
+                <h3>Gestión de Empleados</h3>
+                <p>Administra la información de los empleados, incluyendo datos personales, posiciones y departamentos.</p>
+                <a href="#" class="btn">Ver Empleados</a>
+                <a href="#" class="btn">Agregar Empleado</a>
+            </div>
+            
+            <div class="card">
+                <h3>Horarios de Trabajo</h3>
+                <p>Configura y gestiona los horarios de trabajo de todos los empleados.</p>
+                <a href="#" class="btn">Ver Horarios</a>
+                <a href="#" class="btn">Configurar Horarios</a>
+            </div>
+            
+            <div class="card">
+                <h3>Solicitudes de Vacaciones</h3>
+                <p>Revisa y aprueba las solicitudes de vacaciones de los empleados.</p>
+                <a href="#" class="btn">Solicitudes Pendientes</a>
+                <a href="#" class="btn">Historial de Vacaciones</a>
+            </div>
+            
+            <div class="card">
+                <h3>Gestión de Nómina</h3>
+                <p>Administra salarios, bonificaciones y deducciones de los empleados.</p>
+                <a href="#" class="btn">Generar Nómina</a>
+                <a href="#" class="btn">Historial de Pagos</a>
+            </div>
+            
+            <div class="card">
+                <h3>Control de Asistencia</h3>
+                <p>Monitorea la asistencia y puntualidad de los empleados a través del sistema biométrico.</p>
+                <a href="#" class="btn">Asistencia Hoy</a>
+                <a href="#" class="btn">Reportes de Asistencia</a>
+            </div>
+            
+            <div class="card">
+                <h3>Notificaciones</h3>
+                <p>Configura y envía notificaciones por correo electrónico y SMS.</p>
+                <a href="#" class="btn">Enviar Notificación</a>
+                <a href="#" class="btn">Historial de Notificaciones</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Funcionalidad básica de JavaScript para el portal administrativo
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Portal Administrativo SIGRH cargado');
+            
+            // Agregar event listeners para los botones
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const action = this.textContent;
+                    alert(`Funcionalidad "${action}" será implementada próximamente`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

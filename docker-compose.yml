@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  sigrh-web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=sqlite:///data/sigrh.db
+      - DEBUG=False
+      - COMPANY_NAME=Mi Empresa S.A.
+    volumes:
+      - ./data:/app/data
+    command: python interfaces/web/app.py
+
+  sigrh-mobile:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///data/sigrh.db
+      - DEBUG=False
+    volumes:
+      - ./data:/app/data
+    command: python interfaces/mobile/mobile_api.py
+
+  sigrh-console:
+    build: .
+    environment:
+      - DATABASE_URL=sqlite:///data/sigrh.db
+    volumes:
+      - ./data:/app/data
+    command: python main.py
+    stdin_open: true
+    tty: true
+
+volumes:
+  sigrh_data:
