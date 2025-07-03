@@ -2,13 +2,12 @@
 #include "funciones.h"
 
 int main() {
-
-    struct Jugador jugadores[30];
-    struct Equipo equipos[8];
-    struct Partido partidos[4];
-    int numJugadores = 0;
-    int numEquipos = 0;
-    int numPartidos = 0;
+    struct LecturaPolucion lecturas[100];
+    struct ZonaMonitoreo zonas[10];
+    struct Alerta alertas[50];
+    int numLecturas = 0;
+    int numZonas = 0;
+    int numAlertas = 0;
 
     int opc;
     do
@@ -17,39 +16,42 @@ int main() {
         switch (opc)
         {
             case 1:
-                crearJugadores();
-                printf("Jugadores creados correctamente.\n");
+                crearDatosPolucion();
+                printf("Datos de contaminación creados correctamente.\n");
                 break;
             case 2:
-                crearEquipos();
-                printf("Equipos creados correctamente.\n");
+                crearZonasMonitoreo();
+                printf("Zonas de monitoreo creadas correctamente.\n");
                 break;
             case 3:
-                if(cargarJugadores(jugadores, &numJugadores)) {
-                    imprimirJugadores(jugadores, numJugadores);
+                if(cargarLecturas(lecturas, &numLecturas)) {
+                    imprimirLecturas(lecturas, numLecturas);
                 } else {
-                    printf("No se pudieron cargar los jugadores.\n");
+                    printf("No se pudieron cargar las lecturas.\n");
                 }
                 break;
             case 4:
-                if(leerEquipos(equipos, &numEquipos)) {
-                    imprimirEquipos(equipos, numEquipos);
+                if(leerZonas(zonas, &numZonas)) {
+                    imprimirZonas(zonas, numZonas);
                 } else {
-                    printf("No se pudieron cargar los equipos.\n");
+                    printf("No se pudieron cargar las zonas.\n");
                 }
                 break;
             case 5:
-                crearPartidos();
-                printf("Partidos creados correctamente.\n");
+                generarPredicciones();
+                printf("Predicciones generadas correctamente.\n");
                 break;
             case 6:
-                if(leerPartidos(partidos, &numPartidos)) {
-                    imprimirPartidos(partidos, numPartidos);
+                if(leerAlertas(alertas, &numAlertas)) {
+                    imprimirAlertas(alertas, numAlertas);
                 } else {
-                    printf("No se pudieron cargar los partidos.\n");
+                    printf("No se pudieron cargar las alertas.\n");
                 }
                 break;
             case 7:
+                generarReporte();
+                break;
+            case 8:
                 printf("Saliendo del programa.\n");
                 break;
             default:
@@ -57,8 +59,7 @@ int main() {
                 break;
         }
 
-    } while (opc!= 7);
-    
+    } while (opc != 8);
     
     return 0;
 }
