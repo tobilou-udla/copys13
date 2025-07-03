@@ -1,38 +1,85 @@
-struct Jugador
+// Estructura para almacenar datos de contaminantes
+struct Contaminante
+{
+    float co2;      // Dióxido de carbono (ppm)
+    float so2;      // Dióxido de azufre (µg/m³)
+    float no2;      // Dióxido de nitrógeno (µg/m³)
+    float pm25;     // Partículas PM2.5 (µg/m³)
+};
+
+// Estructura para factores climáticos
+struct FactoresClimaticos
+{
+    float temperatura;    // Temperatura (°C)
+    float humedad;       // Humedad relativa (%)
+    float velocidadViento; // Velocidad del viento (km/h)
+    char direccionViento[10]; // Dirección del viento
+};
+
+// Estructura para una zona de monitoreo
+struct ZonaMonitoreo
 {
     int id;
     char nombre[50];
-    char posicion[20];
-    int goles;
+    char ubicacion[100];
+    struct Contaminante contaminantes;
+    struct FactoresClimaticos factoresClimaticos;
+    char fecha[20];      // Fecha de la medición
+    char hora[10];       // Hora de la medición
 };
 
-struct Equipo
+// Estructura para almacenar datos históricos
+struct RegistroHistorico
 {
     int id;
-    char nombre[50];
-    struct Jugador jugadores[6];
+    int zonaId;
+    struct Contaminante contaminantes;
+    struct FactoresClimaticos factoresClimaticos;
+    char fecha[20];
+    char hora[10];
 };
 
-struct Partido
+// Estructura para alertas
+struct Alerta
 {
     int id;
-    struct Equipo equipo1;
-    struct Equipo equipo2;
-    int golesEquipo1;
-    int golesEquipo2;
+    int zonaId;
+    char tipoContaminante[10];
+    float valorActual;
+    float umbralCritico;
+    char nivelAlerta[20];  // NORMAL, PRECAUCION, ALERTA, EMERGENCIA
+    char mensaje[200];
+    char fecha[20];
+    char hora[10];
 };
 
+// Funciones principales del sistema de monitoreo de contaminación
 void leerCadena(char *cadena, int num);
-void crearJugadores();
-void crearEquipos();
-void imprimirEquipos(struct Equipo equipos[], int numEquipos);
-void guardarEquipos(struct Equipo equipos[], int numEquipos);
-int leerEquipos(struct Equipo equipos[], int *numEquipos);
-void crearPartidos();
-void imprimirPartidos(struct Partido partidos[4], int numPartidos);
-void guardarPartidos(struct Partido partidos[4], int numPartidos);
-int leerPartidos(struct Partido partidos[4], int *numPartidos);
+void obtenerFechaHora(char *fecha, char *hora);
 int menu();
-void imprimirJugadores(struct Jugador jugadores[], int numJugadores);
-void guardarJugadores(struct Jugador jugadores[], int numJugadores);
-int cargarJugadores(struct Jugador jugadores[], int *numJugadores);
+
+// Funciones para manejo de zonas de monitoreo
+void crearZonasMonitoreo();
+void registrarLectura();
+void mostrarZonas(struct ZonaMonitoreo zonas[], int numZonas);
+void guardarZonas(struct ZonaMonitoreo zonas[], int numZonas);
+int cargarZonas(struct ZonaMonitoreo zonas[], int *numZonas);
+
+// Funciones para manejo de datos históricos
+void guardarRegistroHistorico(struct RegistroHistorico registros[], int numRegistros);
+int cargarRegistroHistorico(struct RegistroHistorico registros[], int *numRegistros);
+void mostrarHistorico(struct RegistroHistorico registros[], int numRegistros);
+
+// Funciones de predicción
+float calcularPromedioRomano(struct RegistroHistorico registros[], int numRegistros, int zonaId, char tipoContaminante[]);
+void generarPrediccion(struct ZonaMonitoreo zonas[], int numZonas);
+
+// Funciones de alertas
+void generarAlertas(struct ZonaMonitoreo zonas[], int numZonas);
+void mostrarAlertas(struct Alerta alertas[], int numAlertas);
+void guardarAlertas(struct Alerta alertas[], int numAlertas);
+int cargarAlertas(struct Alerta alertas[], int *numAlertas);
+
+// Funciones de reportes
+void generarReporte(struct ZonaMonitoreo zonas[], int numZonas, struct RegistroHistorico registros[], int numRegistros);
+void exportarDatos(struct ZonaMonitoreo zonas[], int numZonas);
