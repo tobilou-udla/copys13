@@ -1,0 +1,13 @@
+# Archivos binarios compilados
+main
+*.exe
+*.out
+
+# Archivos de datos del sistema
+*.dat
+*.txt
+reporte_contaminacion.txt
+
+# Archivos temporales
+*.tmp
+*.temp
