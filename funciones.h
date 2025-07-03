@@ -1,38 +1,46 @@
-struct Jugador
+struct Empleado
 {
     int id;
     char nombre[50];
-    char posicion[20];
-    int goles;
+    char puesto[30];
+    float salario;
+    int departamentoId;
+    char fechaIngreso[12];
+    int diasVacaciones;
+    int horasExtras;
 };
 
-struct Equipo
+struct Departamento
 {
     int id;
     char nombre[50];
-    struct Jugador jugadores[6];
+    int numEmpleados;
+    struct Empleado empleados[20];
 };
 
-struct Partido
+struct Asistencia
 {
     int id;
-    struct Equipo equipo1;
-    struct Equipo equipo2;
-    int golesEquipo1;
-    int golesEquipo2;
+    int empleadoId;
+    char fecha[12];
+    char horaEntrada[10];
+    char horaSalida[10];
+    int minutosAtraso;
 };
 
 void leerCadena(char *cadena, int num);
-void crearJugadores();
-void crearEquipos();
-void imprimirEquipos(struct Equipo equipos[], int numEquipos);
-void guardarEquipos(struct Equipo equipos[], int numEquipos);
-int leerEquipos(struct Equipo equipos[], int *numEquipos);
-void crearPartidos();
-void imprimirPartidos(struct Partido partidos[4], int numPartidos);
-void guardarPartidos(struct Partido partidos[4], int numPartidos);
-int leerPartidos(struct Partido partidos[4], int *numPartidos);
+void crearEmpleados();
+void crearDepartamentos();
+void imprimirDepartamentos(struct Departamento departamentos[], int numDepartamentos);
+void guardarDepartamentos(struct Departamento departamentos[], int numDepartamentos);
+int leerDepartamentos(struct Departamento departamentos[], int *numDepartamentos);
+void registrarAsistencia();
+void imprimirAsistencias(struct Asistencia asistencias[], int numAsistencias);
+void guardarAsistencias(struct Asistencia asistencias[], int numAsistencias);
+int leerAsistencias(struct Asistencia asistencias[], int *numAsistencias);
 int menu();
-void imprimirJugadores(struct Jugador jugadores[], int numJugadores);
-void guardarJugadores(struct Jugador jugadores[], int numJugadores);
-int cargarJugadores(struct Jugador jugadores[], int *numJugadores);
+void imprimirEmpleados(struct Empleado empleados[], int numEmpleados);
+void guardarEmpleados(struct Empleado empleados[], int numEmpleados);
+int cargarEmpleados(struct Empleado empleados[], int *numEmpleados);
+void consultarVacaciones();
+void procesarNomina();
